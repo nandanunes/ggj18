@@ -17,6 +17,8 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     private List<ActionBlock> list;
     public Text score;
     private int _score = 0;
+    public GameObject optionsPanel;
+    public Button actionButton;
 
     void Start()
     {
@@ -54,7 +56,6 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
                 _score += block.score;
                 
                 score.text = _score.ToString();
-
             }
         }
 
@@ -94,7 +95,21 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             if (niceWord.index >= 0)
             {
                 var block = list[niceWord.index];
-                block.score = 5;
+                foreach (Transform child in optionsPanel.transform) GameObject.Destroy(child.gameObject);
+                foreach (var l in block.options)
+                {
+                    var b = GameObject.Instantiate(actionButton);
+                    b.transform.SetParent(optionsPanel.transform);
+                    b.name = l.param;
+                    b.GetComponentInChildren<Text>().text = l.name;
+                    b.onClick.AddListener(
+                        () => {
+                            foreach (Transform child in optionsPanel.transform) GameObject.Destroy(child.gameObject);
+                            _text.text = _text.text.Remove(niceWord.beginIndex, niceWord.lastIndex).Insert(niceWord.beginIndex, l.param);
+                            block.score = l.deltaScore;
+                            }
+                        );
+                }
             }
         }
     }
