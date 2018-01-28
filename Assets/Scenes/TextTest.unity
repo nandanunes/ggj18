@@ -182,26 +182,28 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "The presenter of the show HARU wears a <b>red</b> <b>suit</b> and roars:\r\n\u201CWelcome
-    to the final game of Slippery Stairs!\r\nGive it up for Yui and Kaito, everyone!!!\u201D\r\n\r\nTHE
-    AUDIENCE <b>claps</b>. AUDIENCE #1 stands up out of excitement, clapping. His
-    face is painted in Yui\u2019s team\u2019s color.\r\n\r\nYUI and KAITO both wear
-    <b>vinyl</b> and protection on their elbows, knees and hands. YUI\u2019s costume
-    is <b>green</b>. KAITO\u2019s is <b>orange</b>. \r\n\r\nPRESENTER:\r\nLet\u2019s
+  m_Text: "The presenter of the show HARU wears a <b>red</b> <b>suit</b> and roars:\r\n\r\nPRESENTER:
+    \r\n<i> \u201CWelcome to the final game of Slippery <b>Stairs</b>! Give it up
+    for YUI and KAITO, everyone!!!\u201D </i>\r\n\r\nThe whole audience <b>claps</b>.
+    AUDIENCE#1 stands up out of <b>excitement</b>, clapping. His face is painted in
+    Yui\u2019s team\u2019s color.\r\n\r\nYUI and KAITO both wear <b>vinyl</b> and
+    protection on their <b>elbows</b>, <b>knees</b> and hands. YUI\u2019s costume
+    is <b>green</b>. KAITO\u2019s is <b>orange</b>. \r\n\r\nPRESENTER:\r\n<i>\u201DLet\u2019s
     see who will make it to the top of the stairs!\r\n[mumbles to his tiny microphone]\r\nof
-    course we know that no one will -- like always\u201D\r\n\r\nThe audience gasps
+    course we know that no one will -- like always\u201D</i>\r\n\r\nThe audience gasps
     and <b>laughs</b>.\r\n\r\nAUDIENCE #2 jumps up and down waving an <b>orange</b>
-    <b>flag</b>.\r\nAUDIENCE #2 \r\nGo Kaitoooo! Whohoo!\r\n\r\nKaito puts his fists
-    up victoriously and <b>laughs</b>.\r\n\r\nYui squints her eyes at Kaito and takes
-    her position at the first step of the staircase. \r\n\r\nPRESENTER:\r\nOn your
-    mark!\r\nGet ready!\r\n\r\n*drum rolls*\r\nPRESENTER\r\nGo!\r\n\r\nYui and Kaito
-    slowly but steadily crawl up the stairs one by one. \r\n\r\nAUDIENCE #3 in Kawaii
-    Harajuku style <b>pink</b> <b>stockings</b>, eats a <b>baby blue</b> Japanese
-    cheesecake.\r\n\r\nKaito slips down the stairs. \r\n\r\nPRESENTER\r\n<b>Orange</b>
-    is down!\r\n\r\nYui slips too because of Kaito\u2019s falling impact. <b>Vinyl</b>
-    doesn\u2019t seem to be helping them.\r\n\r\nPresenter, \u201CWhoops! They\u2019re
-    all down!\r\n\r\nEveryone <b>laughs</b>.\r\n\r\nAudience #3 throws the rest of
-    the cake at the Presenter.\r\n\r\nEveryone <b>laughs</b>."
+    <b>flag</b>.\r\n\r\nAUDIENCE #2:\r\n<i>\u201CGo Kaitoooo! Whohoo! [whispering]
+    i love you\u201D</i>\r\n\r\nKAITO puts his fists up victoriously and <b>laughs</b>.\r\n\r\nYUI
+    squints her eyes at KAITO and takes her position at the first step of the <b>staircase</b>.
+    \r\n\r\nPRESENTER:\r\n<i>\u201DOn your mark!\r\nGet ready!!\u201D</i>\r\n\r\n*drum
+    rolls*\r\n\r\nPRESENTER:\r\n<i>\u201CGo!\u201D</i>\r\n\r\nYui and Kaito slowly
+    but steadily crawl up the stairs one by one. \r\n\r\nAUDIENCE #3, in Kawaii Harajuku
+    style <b>pink</b> <b>stockings</b>, eats a <b>baby blue</b> Japanese cheesecake.\r\n\r\nKaito
+    slips down the stairs. \r\n\r\nPRESENTER:\r\n<i>\u201C<b>Orange</b> is down!\u201D</i>\r\n\r\nYui
+    slips too because of Kaito\u2019s falling impact. <b>Vinyl</b> doesn\u2019t seem
+    to be helping them.\r\n\r\nPRESENTER:\r\n<i> \u201CWhoops! They\u2019re all down!\u201D</i>\r\n\r\nEveryone
+    <b>laughs</b>.\r\n\r\nAUDIENCE#3 throws the rest of the cake at PRESENTER.\r\n\r\nEveryone
+    <b>laughs</b>.\r\n\r\n------\r\n"
 --- !u!222 &184569308
 CanvasRenderer:
   m_ObjectHideFlags: 0
