@@ -25,7 +25,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     {
         _text = GetComponent<Text>();
 
-        _text.text = _text.text.Replace("<b>", "<b><color=#323232FF>").Replace("</b>", "</color></b>");
+        _text.text = _text.text.Replace("<b>", "<b><color=#f1f1f2ff>").Replace("</b>", "</color></b>");
 
         list = new List<ActionBlock>();
         list.Add(new ActionBlock(-5, new Replacement[] { new Replacement("change to violet", "violet", 5), new Replacement("change to pink", "pink", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
@@ -64,13 +64,13 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             try
             {
                 if (i == 0 || i == _text.text.Length - 2) continue;
-                if (_text.text[i] != '<' || _text.text[i + 1] != '/' || _text.text[i - 1] == '>') continue;
+                if (_text.text[i] != '<' || _text.text[i + 1] != '/' || _text.text[i + 2] != 'c') continue;
             }
             catch (Exception) { continue; }
 
             Vector2 worldBottomRight = transform.TransformPoint(new Vector2(textGen.verts[i * 4 + 2].position.x, textGen.verts[i * 4 + 2].position.y));
 
-            if (worldBottomRight.y > 230)
+            if (worldBottomRight.y > 215)
             {
                 var word = GetWordAtIndex(i - 1);
                 var block = list[word.index];
@@ -169,13 +169,14 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
         while (begIndex == -1)
         {
             marker--;
-            if (marker < 0 || _text.text[marker] == '<')
+            if (marker < 0 || (_text.text[marker] == '>' && _text.text[marker-1] == 'b'))
             {
                 return new NiceWord(-1, "", -1, -1);
             }
-            else if (_text.text[marker] == '>')
+            else if (_text.text[marker] == '>' && _text.text[marker-1] == 'f')
             {
                 begIndex = marker;
+                break;
             }
         }
 
@@ -191,6 +192,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             else if (_text.text[marker] == '<')
             {
                 lastIndex = marker;
+                break;
             }
         }
 
