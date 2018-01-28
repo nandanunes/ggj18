@@ -24,6 +24,7 @@ public class Tutorial : MonoBehaviour {
     public void AdvancePage(int increment)
     {
         currentPage += increment;
+        currentPage = Mathf.Max(0, currentPage);
         if (currentPage == 0)
         {
             previousButton.SetActive(false);
