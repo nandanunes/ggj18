@@ -21,6 +21,11 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     public GameObject optionsPanel;
     public Button actionButton;
     public Tweet tweetWindow;
+    public Text actionText;
+    public Text pickText;
+    public Sprite[] buttonVisuals;
+
+    private List<Button> buttons;
 
     void Start()
     {
@@ -53,6 +58,11 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
         list.Add(new ActionBlock(-15, "Those bizarre mouth sounds. My child will never recover from the horror. #callMyLawyer", new Replacement[] { new Replacement("screams", "screams", 0, ""), new Replacement("cries", "cries", 0, ""), new Replacement("nods", "nods in approval", 5, "#That's it, nice and polite"), new Replacement("chuckles", "chuckles", -10, "Oh great! Now CHUCKLING can be freely shown on TV? #BoycottAlienCable") }));
 
         score.text = _score.ToString();
+
+        actionText.text = "CHOOSE A WORD";
+        pickText.enabled = false;
+
+        buttons = new List<Button>();
     }
 
     public string ReplaceAt(string input, int index, char newChar)
@@ -65,7 +75,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     void Update()
     {
         var textGen = _text.cachedTextGenerator;
-        for (int i = 1; i < textGen.characterCount-1; ++i)
+        for (int i = 1; i < textGen.characterCount - 1; ++i)
         {
             try
             {
@@ -88,6 +98,23 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
                     tweetWindow.NewTweet(block.feedback, block.score);
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (buttons.Count > 0) buttons[0].onClick.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (buttons.Count > 1) buttons[1].onClick.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (buttons.Count > 2) buttons[2].onClick.Invoke();
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if (buttons.Count > 3) buttons[3].onClick.Invoke();
         }
 
     }
@@ -121,16 +148,25 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             if (niceWord.index >= 0)
             {
                 var block = list[niceWord.index];
+                buttons.Clear();
                 foreach (Transform child in optionsPanel.transform) GameObject.Destroy(child.gameObject);
+                actionText.text = niceWord.word.ToUpper();
+                pickText.enabled = true;
+                int i = 0;
                 foreach (var l in block.options)
                 {
                     var b = GameObject.Instantiate(actionButton);
+                    buttons.Add(b);
                     b.transform.SetParent(optionsPanel.transform);
                     b.name = l.param;
                     b.GetComponentInChildren<Text>().text = l.name;
+                    b.GetComponentInChildren<Image>().sprite = buttonVisuals[i++];
                     b.onClick.AddListener(
                         () => {
+                            buttons.Clear();
                             foreach (Transform child in optionsPanel.transform) GameObject.Destroy(child.gameObject);
+                            actionText.text = "CHOOSE A WORD";
+                            pickText.enabled = false;
                             _text.text= _text.text.Remove(niceWord.beginIndex - 20, niceWord.lastIndex - niceWord.beginIndex + 20).Insert(niceWord.beginIndex - 20, "<b><color=#00ff00ff>" + l.param);
                             block.score = l.deltaScore;
                             block.feedback = l.feedback;
