@@ -36,8 +36,7 @@ public class Tutorial : MonoBehaviour {
         if (currentPage >= images.Length)
         {
             StartGame();
-        }
-        updateTutorialImage();
+        } else updateTutorialImage();
     }
 
     void updateTutorialImage()
