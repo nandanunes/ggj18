@@ -86,7 +86,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
 
             Vector2 worldBottomRight = transform.TransformPoint(new Vector2(textGen.verts[i * 4 + 2].position.x, textGen.verts[i * 4 + 2].position.y));
 
-            if (worldBottomRight.y > 215)
+            if (worldBottomRight.y > 205)
             {
                 var word = GetWordAtIndex(i - 1);
                 var block = list[word.index];
