@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -24,9 +25,26 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     {
         _text = GetComponent<Text>();
 
+        _text.text = _text.text.Replace("<b>", "<b><color=#323232FF>").Replace("</b>", "</color></b>");
+
         list = new List<ActionBlock>();
-        list.Add(new ActionBlock());
-        list.Add(new ActionBlock());
+        list.Add(new ActionBlock(-5, new Replacement[] { new Replacement("change to violet", "violet", 5), new Replacement("change to pink", "pink", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
+        list.Add(new ActionBlock(0, new Replacement[] { new Replacement("change to stocking", "stocking", 0), new Replacement("change to skirt", "skirt", 0), new Replacement("change to skirt", "skirt", 0) }));
+        list.Add(new ActionBlock(0, new Replacement[] { new Replacement("change to cries", "cries", 0), new Replacement("change to laughs", "laughs", -10), new Replacement("change to smiles awkwardly", "smiles awkwardly", 0) }));
+        list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("change to stocking", "stockings", -10), new Replacement("change to ", "change to skirts", 0), new Replacement("just remove the frigging vinyl", "no clothing", 5) }));
+        list.Add(new ActionBlock(-10, new Replacement[] { new Replacement("change to violet", "violet", 0), new Replacement("change to pink", "pink", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
+        list.Add(new ActionBlock(0, new Replacement[] { new Replacement("change to violet", "violet", 0), new Replacement("change to pink", "pink", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
+        list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("change to screams", "screams", 0), new Replacement("change to cries", "cries", 0), new Replacement("change to nods in approval", "nods in approval", 10), new Replacement("change to chuckles", "chuckles", -10) }));
+        list.Add(new ActionBlock(0, new Replacement[] { new Replacement("change to violet", "violet", 0), new Replacement("change to pink", "pink", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
+        list.Add(new ActionBlock(-10, new Replacement[] { new Replacement("change to hamburguer", "change to stocking", -10), new Replacement("change to meaningless cloth", "piece of meaningless cloth", 0), new Replacement("change to vinyl jacket", "vinyl jacket", -10) }));
+        list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("change to screams", "screams", 0), new Replacement("change to cries", "cries", 0), new Replacement("change to nods in approval", "nods in approval", 10), new Replacement("change to chuckles", "chuckles", -10) }));
+        list.Add(new ActionBlock(-10, new Replacement[] { new Replacement("change to violet", "violet", 0), new Replacement("change to golden", "golden", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
+        list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("change to shoes", "", 0), new Replacement("change to cape", "cape", 0), new Replacement("change to vinyl pants", "vinyl pants", -10) }));
+        list.Add(new ActionBlock(10, new Replacement[] { new Replacement("change to violet", "violet", 0), new Replacement("change to pink", "pink", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
+        list.Add(new ActionBlock(0, new Replacement[] { new Replacement("change to violet", "violet", 0), new Replacement("change to pink", "pink", -10), new Replacement("change to cyan", "cyan", -10), new Replacement("change to purple", "purple", -10) }));
+        list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("0", "0", -10), new Replacement("0", "0", 0), new Replacement("0", "0", 0), new Replacement("0", "0", 0) }));
+        list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("change to screams", "screams", 0), new Replacement("change to cries", "cries", 0), new Replacement("change to nods in approval", "nods in approval", 10), new Replacement("change to chuckles", "chuckles", -10) }));
+        list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("change to screams", "screams", 0), new Replacement("change to cries", "cries", 0), new Replacement("change to nods in approval", "nods in approval", 10), new Replacement("change to chuckles", "chuckles", -10) }));
 
         score.text = _score.ToString();
     }
@@ -41,9 +59,14 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     void Update()
     {
         var textGen = _text.cachedTextGenerator;
-        for (int i = 0; i < textGen.characterCount; ++i)
+        for (int i = 1; i < textGen.characterCount-1; ++i)
         {
-            if (_text.text[i] != '}') continue;
+            try
+            {
+                if (i == 0 || i == _text.text.Length - 2) continue;
+                if (_text.text[i] != '<' || _text.text[i + 1] != '/' || _text.text[i - 1] == '>') continue;
+            }
+            catch (Exception) { continue; }
 
             Vector2 worldBottomRight = transform.TransformPoint(new Vector2(textGen.verts[i * 4 + 2].position.x, textGen.verts[i * 4 + 2].position.y));
 
@@ -54,15 +77,9 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
                 if (block.done) continue;
                 block.done = true;
                 _score += block.score;
-                
                 score.text = _score.ToString();
             }
         }
-
-    }
-
-    private void AddScore()
-    {
 
     }
 
@@ -105,7 +122,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
                     b.onClick.AddListener(
                         () => {
                             foreach (Transform child in optionsPanel.transform) GameObject.Destroy(child.gameObject);
-                            _text.text = _text.text.Remove(niceWord.beginIndex, niceWord.lastIndex).Insert(niceWord.beginIndex, l.param);
+                            _text.text= _text.text.Remove(niceWord.beginIndex - 20, niceWord.lastIndex - niceWord.beginIndex + 20).Insert(niceWord.beginIndex - 20, "<b><color=#00ff00ff>" + l.param);
                             block.score = l.deltaScore;
                             }
                         );
@@ -152,11 +169,11 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
         while (begIndex == -1)
         {
             marker--;
-            if (marker < 0 || _text.text[marker] == '}')
+            if (marker < 0 || _text.text[marker] == '<')
             {
                 return new NiceWord(-1, "", -1, -1);
             }
-            else if (_text.text[marker] == '{')
+            else if (_text.text[marker] == '>')
             {
                 begIndex = marker;
             }
@@ -171,16 +188,16 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             {
                 return new NiceWord(-1, "", -1, -1);
             }
-            else if (_text.text[marker] == '}')
+            else if (_text.text[marker] == '<')
             {
                 lastIndex = marker;
             }
         }
 
-        string source = _text.text.Substring(0, lastIndex - 1);
-        int count = 0;
-        foreach (char c in source) if (c == '}') count++;
+        string source = _text.text.Substring(0, lastIndex);
+        int count = -2;
+        foreach (char c in source) if (c == '<') count++;
 
-        return new NiceWord(count, _text.text.Substring(begIndex + 1, lastIndex - begIndex - 1), begIndex + 1, lastIndex - begIndex - 1);
+        return new NiceWord(count/4, _text.text.Substring(begIndex + 1, lastIndex - begIndex - 1), begIndex + 1, lastIndex);
     }
 }
