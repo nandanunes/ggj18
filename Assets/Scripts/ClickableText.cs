@@ -20,6 +20,9 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     private int _score = 0;
     public GameObject optionsPanel;
     public Button actionButton;
+    public Text actionText;
+    public Text pickText;
+    public Sprite[] buttonVisuals;
 
     void Start()
     {
@@ -47,6 +50,9 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
         list.Add(new ActionBlock(-15, new Replacement[] { new Replacement("change to screams", "screams", 0), new Replacement("change to cries", "cries", 0), new Replacement("change to nods in approval", "nods in approval", 10), new Replacement("change to chuckles", "chuckles", -10) }));
 
         score.text = _score.ToString();
+
+        actionText.text = "CHOOSE A WORD";
+        pickText.enabled = false;
     }
 
     public string ReplaceAt(string input, int index, char newChar)
@@ -113,15 +119,21 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             {
                 var block = list[niceWord.index];
                 foreach (Transform child in optionsPanel.transform) GameObject.Destroy(child.gameObject);
+                actionText.text = niceWord.word.ToUpper();
+                pickText.enabled = true;
+                int i = 0;
                 foreach (var l in block.options)
                 {
                     var b = GameObject.Instantiate(actionButton);
                     b.transform.SetParent(optionsPanel.transform);
                     b.name = l.param;
                     b.GetComponentInChildren<Text>().text = l.name;
+                    b.GetComponentInChildren<Image>().sprite = buttonVisuals[i++];
                     b.onClick.AddListener(
                         () => {
                             foreach (Transform child in optionsPanel.transform) GameObject.Destroy(child.gameObject);
+                            actionText.text = "CHOOSE A WORD";
+                            pickText.enabled = false;
                             _text.text= _text.text.Remove(niceWord.beginIndex - 20, niceWord.lastIndex - niceWord.beginIndex + 20).Insert(niceWord.beginIndex - 20, "<b><color=#00ff00ff>" + l.param);
                             block.score = l.deltaScore;
                             }
