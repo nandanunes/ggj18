@@ -16,7 +16,6 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     public Camera _camera;
     private Text _text;
     private List<ActionBlock> list;
-    public Text score;
     private int _score = 0;
     public GameObject optionsPanel;
     public Button actionButton;
@@ -24,6 +23,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     public Text actionText;
     public Text pickText;
     public Sprite[] buttonVisuals;
+    public Meter meter;
 
     private List<Button> buttons;
 
@@ -56,8 +56,6 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
         list.Add(new ActionBlock(-15, "For the big bang’s sake! i’m watching this show with my infants. #StopVinyl", new Replacement[] { new Replacement("stocking", "stockings", -20, "WHAT! IS THAT A STOCKING ON LIVE TV? #offended"), new Replacement("salmon skin", "salmon skin", 10, "That salmon skin is amazing. #want #need #salmon #skin #noFilter #waitWhat"), new Replacement("just remove the frigging vinyl", "no clothing", 5, "YAY! #goNudeOrGoHome") }));
         list.Add(new ActionBlock(-15, "Laughing is disgusting. #ProtectOurChildren #StopLaughin", new Replacement[] { new Replacement("screams", "screams", 0, ""), new Replacement("cries", "cries", 0, "Weird, but at least they're not laughing!"), new Replacement("nods", "nods in approval", 5, "What a civilized audience."), new Replacement("chuckles", "chuckles", -10, "That's even worse than laughing! ") }));
         list.Add(new ActionBlock(-15, "Those bizarre mouth sounds. My child will never recover from the horror. #callMyLawyer", new Replacement[] { new Replacement("screams", "screams", 0, ""), new Replacement("cries", "cries", 0, ""), new Replacement("nods", "nods in approval", 5, "#That's it, nice and polite"), new Replacement("chuckles", "chuckles", -10, "Oh great! Now CHUCKLING can be freely shown on TV? #BoycottAlienCable") }));
-
-        score.text = _score.ToString();
 
         actionText.text = "CHOOSE A WORD";
         pickText.enabled = false;
@@ -93,7 +91,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
                 if (block.done) continue;
                 block.done = true;
                 _score += block.score;
-                score.text = _score.ToString();
+                meter.SetScore(_score);
                 if (block.feedback != "") {
                     tweetWindow.NewTweet(block.feedback, block.score);
                 }
