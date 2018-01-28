@@ -13,10 +13,10 @@ public class Tweet : MonoBehaviour {
 
     void Start () {
         channelNames = new List<string>(){
-            "a", "b"
+            "@theRealHuman", "@BlorpJohnson3000", "@EqualityForAllAliens_", "@theGoodAlien99", "@OnlyVibez", "@MillaliensKilledPluto", "@SwipeMeLeftPlease", "@MrsCatsfire", "@SubscribeMyChannel", "@FamilyGal007", "@IHateAliens_x", "@JessicasGirlfriend", "@freeAlienBlorpNow", "@CoverYourMouth028", "@boredAlienJason", "@NeverFinishWatching", "@ChannelCriticMagazine", "@SalamuraUzaylıHuseyin", "@BigGreenHead23", "@ETRowling", "@lostInTransmission", "@endlessGreenVoid", "@spaceWonderer", "@BbCita"
         };
         userNames = new List<string>(){
-            "c", "d"
+            "JoTy Zurg", "Blorpee KeeToo", "OinkDeWoo", "Qwarp Letu", "Ptilm Zy", "John Smith", "Rjuk Rjuk", "Zlorpee Yipp", "Platee Groolp", "YobYob Pee", "Kippz Tipz", "Wlept Tlepsorp", "Rre Flixbus", "Xyud Mamo", "Dobidob Grop", "Fanama Plut", "Quba Tuba", "Oliq Rot"
         };
         NewTweet("Another Earth TV show is about to start! So excited!", 0);
     }
@@ -29,11 +29,15 @@ public class Tweet : MonoBehaviour {
         message.text = text;
         if (score > 0)
         {
-
+            message.color = Color.green;
         }
         else if (score < 0)
         {
-
+            message.color = Color.red;
+        }
+        else
+        {
+            message.color = Color.white;
         }
         usernameText.text = userNames[Random.Range(0, userNames.Count)];
         channelText.text = channelNames[Random.Range(0, channelNames.Count)];
