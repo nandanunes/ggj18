@@ -24,6 +24,7 @@ public class Tutorial : MonoBehaviour {
     public void AdvancePage(int increment)
     {
         currentPage += increment;
+        currentPage = Mathf.Max(0, currentPage);
         if (currentPage == 0)
         {
             previousButton.SetActive(false);
@@ -35,8 +36,7 @@ public class Tutorial : MonoBehaviour {
         if (currentPage >= images.Length)
         {
             StartGame();
-        }
-        updateTutorialImage();
+        } else updateTutorialImage();
     }
 
     void updateTutorialImage()
