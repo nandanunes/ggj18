@@ -14,3 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TextTest.unity
     guid: 47c001c09878aef4c89f5439c5de37f9
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: ea7370e1b2e5c8740a8028aab1bbcfd5
+  - enabled: 1
+    path: Assets/Scenes/LevelClear.unity
+    guid: 96f9becc33d5b554096c1ba2f351b428
