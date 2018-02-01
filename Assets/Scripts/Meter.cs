@@ -16,14 +16,12 @@ public class Meter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-
+        arrow.position = Vector3.Lerp(arrow.position, neutralPos + new Vector3(score * 10, 0, 0), 0.1f);
     }
 
     public void SetScore(int s)
     {
         score = s;
-        score = Mathf.Max(score, -30);
-        score = Mathf.Min(score, 30);
-        arrow.position = neutralPos + new Vector3(score * 10, 0, 0);
+        score = Mathf.Clamp(score, -30, 30);
     }
 }

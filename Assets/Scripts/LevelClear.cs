@@ -17,6 +17,6 @@ public class LevelClear : MonoBehaviour {
 
     public void NextLevel () {
         PlayerProgression.currentLevel++;
-        SceneManager.LoadScene("TextTest");
+        SceneManager.LoadScene("Gameplay");
 	}
 }

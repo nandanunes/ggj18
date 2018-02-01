@@ -242,7 +242,6 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     {
 
         _text = GetComponent<Text>();
-        _text.text = _text.text.Replace("<b>", "<b><color=#f1f1f2ff>").Replace("</b>", "</color></b>");
 
         list = new List<ActionBlock>();
         if (n == 0)
@@ -290,5 +289,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             list.Add(new ActionBlock(0, "", new Replacement[] { new Replacement("Madison", "Madison", -10, "Wait, her, her dog AND her son are all called Madison?"), new Replacement("Doggy", "Doggy", -10, "She gave her son a slave-name? I'm so confused and offended"), new Replacement("Rex", "Rex", -10, "She gave her son a slave-name? I'm so confused and offended") }));
             list.Add(new ActionBlock(-10, "What the hell is poochypoo? IS THIS MERCHANDISING??? #disgusted", new Replacement[] { new Replacement("any shampoo", "any", 5, "Totally agree. 'Any shampoo is the best shampoo!'"), new Replacement("homemade", "Homemade", 5, "Yes, for DIY moms as myself #make #your #own #shampoo"), new Replacement("Alien Brand (tm)", "AlienBrand(tm)", -10, "A TV show that talks about brands??? IS THIS CAPITALISM??") }));
         }
+        _text.text = _text.text.Replace("<b>", "<b><color=#f1f1f2ff>").Replace("</b>", "</color></b>");
+
     }
 }
