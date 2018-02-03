@@ -25,6 +25,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     public Text pickText;
     public Sprite[] buttonVisuals;
     public Meter meter;
+    public GameObject liveLine;
 
     private List<Button> buttons;
 
@@ -60,9 +61,9 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
             }
             catch (Exception) { continue; }
 
-            Vector2 worldBottomRight = transform.TransformPoint(new Vector2(textGen.verts[i * 4 + 2].position.x, textGen.verts[i * 4 + 2].position.y));
+            Vector2 wordBottomRight = transform.TransformPoint(new Vector2(textGen.verts[i * 4 + 2].position.x, textGen.verts[i * 4 + 2].position.y));
 
-            if (worldBottomRight.y > 205)
+            if (wordBottomRight.y > liveLine.transform.position.y)
             {
                 var word = GetWordAtIndex(i - 1);
                 var block = list[word.index];
