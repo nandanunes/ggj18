@@ -21,7 +21,8 @@ public class TweetWindow : MonoBehaviour {
         userNames = new List<string>(){
             "JoTy Zurg", "Blorpee KeeToo", "OinkDeWoo", "Qwarp Letu", "Ptilm Zy", "John Smith", "Rjuk Rjuk", "Zlorpee Yipp", "Platee Groolp", "YobYob Pee", "Kippz Tipz", "Wlept Tlepsorp", "Rre Flixbus", "Xyud Mamo", "Dobidob Grop", "Fanama Plut", "Quba Tuba", "Oliq Rot"
         };
-        NewTweet("Another Earth TV show is about to start! So excited!", 0);
+        tweetList = new List<Tweet>();
+        tweetList.Add(new Tweet("Another Earth TV show is about to start! So excited!", 0));
         StartCoroutine(ScheduleTweetList());
     }
 
@@ -29,23 +30,31 @@ public class TweetWindow : MonoBehaviour {
     {
         while (true)
         {
+            if(tweetList.Count > 0)
+            {
+                NewTweet(tweetList[0]);
+                tweetList.RemoveAt(0);
+                yield return new WaitForSeconds(1);
+            }
             yield return null;
+            
+
         }
     }
 	
 	void Update () {
 		
 	}
-    public void NewTweet(string text, int score)
+    public void NewTweet(Tweet t)
     {
-        message.text = text;
+        message.text = t.text;
         anim.SetTrigger("newTweet");
         anim.SetBool("bad", false);
-        if (score > 0)
+        if (t.score > 0)
         {
             message.color = Color.green;
         }
-        else if (score < 0)
+        else if (t.score < 0)
         {
             message.color = Color.red;
             anim.SetBool("bad", true);
@@ -65,4 +74,10 @@ public struct Tweet
 {
     public string text;
     public int score;
+    public Tweet(string t, int s)
+    {
+        text = t;
+        score = s;
+    }
+
 }
