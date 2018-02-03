@@ -20,12 +20,12 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
     private int _score = 0;
     public GameObject optionsPanel;
     public Button actionButton;
-    public Tweet tweetWindow;
+    public TweetWindow tweetWindow;
     public Text actionText;
     public Text pickText;
     public Sprite[] buttonVisuals;
     public Meter meter;
-    public GameObject liveLine;
+    public RectTransform liveLine;
 
     private List<Button> buttons;
 
@@ -63,7 +63,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
 
             Vector2 wordBottomRight = transform.TransformPoint(new Vector2(textGen.verts[i * 4 + 2].position.x, textGen.verts[i * 4 + 2].position.y));
 
-            if (wordBottomRight.y > liveLine.transform.position.y)
+            if (wordBottomRight.y > liveLine.offsetMin.y)
             {
                 var word = GetWordAtIndex(i - 1);
                 var block = list[word.index];
