@@ -72,7 +72,7 @@ public class ClickableText : MonoBehaviour, IPointerDownHandler
                 _score += block.score;
                 meter.SetScore(_score);
                 if (block.feedback != "") {
-                    tweetWindow.NewTweet(new Tweet(block.feedback, block.score));
+                    tweetWindow.ScheduleTweet(new Tweet(block.feedback, block.score));
                 }
                 if (_score <= -30)
                 {

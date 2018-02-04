@@ -32,20 +32,24 @@ public class TweetWindow : MonoBehaviour {
         {
             if(tweetList.Count > 0)
             {
-                NewTweet(tweetList[0]);
+                ShowTweet(tweetList[0]);
                 tweetList.RemoveAt(0);
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(2);
             }
             yield return null;
-            
-
         }
     }
 	
 	void Update () {
 		
 	}
-    public void NewTweet(Tweet t)
+
+    public void ScheduleTweet(Tweet t)
+    {
+        tweetList.Add(t);
+    }
+
+    public void ShowTweet(Tweet t)
     {
         message.text = t.text;
         anim.SetTrigger("newTweet");
